@@ -1,7 +1,9 @@
 /* ############################ CSS VARIABLES ############################ */
 :root {
   --primary: #fff;
-  --dark_background: #2e132c;
+  --dark-background: #2e132c;
+  --red: #f50d5a;
+  --dark-text: #60265b;
 
   --font-family-body: 'Fira Code', monospace;
   --font-family-title: Silkscreen;
@@ -9,6 +11,7 @@
   --font-size-texto-title: 2.25rem;
   --font-size-main-button: 1.25rem;
   --font-size-texto-normal: 1.125rem;
+  --font-size-texto-footer: 0.875rem;
 
   --font-weight-title: 700;
   --font-weight-regular: 400;
@@ -38,16 +41,28 @@ body {
   background: var(--dark-background);
   color: var(--primary);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.2;
 }
 
-.container {
-  width: 88%;
-  max-width: 1000px;
-  margin: 0 auto;
+.title-text {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-texto-title);
+  font-weight: var(--font-weight-title);
+  line-height: 1;
+  /* margin-bottom: 1.5rem; */
 }
 
-@media screen and (min-width: 500px) {
+.footer-text {
+  color: var(--dark-text);
+  font-size: var(--font-size-texto-footer);
+  text-align: center;
+}
+
+.red-text {
+  color: var(--red);
+}
+
+/* @media screen and (min-width: 500px) {
   :root {
     --font-size-texto-normal: 1.3rem;
   }
@@ -64,4 +79,4 @@ body {
   :root {
     --font-size-texto-normal: 1.6rem;
   }
-}
+} */

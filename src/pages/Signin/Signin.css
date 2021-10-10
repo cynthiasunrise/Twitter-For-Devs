@@ -1,0 +1,40 @@
+.signin {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  max-width: 300px;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.signin__logo-container {
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.signin__logo-container img {
+  width: 95%;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.signin__content-container {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-text {
+  margin-top: 0;
+}
+
+.signin__content-body {
+  flex-grow: 1;
+}
+
+.signin__content-container img {
+  margin-top: 1rem;
+  width: 95%;
+  max-width: 250px;
+}
