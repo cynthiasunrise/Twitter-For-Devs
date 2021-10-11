@@ -4,13 +4,21 @@
   --dark-background: #2e132c;
   --red: #f50d5a;
   --dark-text: #60265b;
+  --input-text: #914d8b;
+
+  --red: #f50d5a;
+  --orange: #ff865c;
+  --yellow: #ffea5c;
+  --green: #00da76;
+  --blue: #0096ce;
+  --purple: #800fff;
 
   --font-family-body: 'Fira Code', monospace;
   --font-family-title: Silkscreen;
 
-  --font-size-texto-title: 2.25rem;
-  --font-size-main-button: 1.25rem;
-  --font-size-texto-normal: 1.125rem;
+  --font-size-texto-title: 2rem;
+  --font-size-main-button: 1.125rem;
+  --font-size-texto-normal: 1rem;
   --font-size-texto-footer: 0.875rem;
 
   --font-weight-title: 700;

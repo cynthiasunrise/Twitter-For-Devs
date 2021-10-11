@@ -2,13 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 70%;
-  max-width: 300px;
+  max-width: 250px;
   margin: 0 auto;
-  height: 100vh;
 }
 
 .signin__logo-container {
-  height: 50%;
+  height: 50vh;
   display: flex;
   align-items: center;
 }
@@ -20,7 +19,6 @@
 }
 
 .signin__content-container {
-  height: 50%;
   display: flex;
   flex-direction: column;
 }
@@ -37,4 +35,5 @@
   margin-top: 1rem;
   width: 95%;
   max-width: 250px;
+  cursor: pointer;
 }
