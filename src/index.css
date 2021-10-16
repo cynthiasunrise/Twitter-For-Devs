@@ -70,6 +70,12 @@ body {
   color: var(--red);
 }
 
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 /* @media screen and (min-width: 500px) {
   :root {
     --font-size-texto-normal: 1.3rem;

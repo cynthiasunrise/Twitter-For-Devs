@@ -1,5 +1,5 @@
-import ColorPicker from '../../components/ColorPicker';
 import Footer from '../../components/Footer';
+import ColorPicker from './ColorPicker';
 import './Welcome.css';
 
 function Welcome() {
@@ -8,7 +8,7 @@ function Welcome() {
   return (
     <div className="welcome">
       <div className="welcome__logo-container">
-        <img src="./images/logo_big.svg" alt="Devs United Logo" />
+        <img src="/images/logo_big.svg" alt="Devs United Logo" />
       </div>
       <div className="welcome__content-container">
         <div className="welcome__content-body">

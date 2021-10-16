@@ -1,0 +1,47 @@
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  line-height: 0;
+}
+
+.header__img_back {
+  height: 20px;
+}
+
+.header__img_logout {
+  height: 25px;
+}
+.header__img_profile {
+  height: 30px;
+}
+
+.header img {
+  vertical-align: middle;
+}
+
+.header__img_logo {
+  height: 20px;
+  margin-right: 0.5rem;
+}
+
+.header__img_devs_text {
+  height: 10px;
+}
+
+.header__img_united_text {
+  height: 9px;
+}
+
+.title_text {
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+}
+
+.header__left,
+.header__right {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+}
