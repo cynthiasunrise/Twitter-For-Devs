@@ -8,8 +8,8 @@ function Header() {
     if (pathname === '/') {
       return (
         <img
-          className="header__img_profile"
-          src="/images/profilePic_color.svg"
+          className="ornacia header__img_profile"
+          src="/images/ornacia.jpg"
           alt="My Profile Icon"
         />
       );

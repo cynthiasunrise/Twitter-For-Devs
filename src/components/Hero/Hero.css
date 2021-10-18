@@ -1,0 +1,53 @@
+.hero {
+  background-color: #150714;
+}
+
+.hero__two_columns {
+  display: flex;
+  align-items: top;
+  padding: 2rem 1rem;
+}
+
+.hero__left {
+  flex-basis: 15%;
+}
+
+.hero__right {
+  flex-grow: 1;
+}
+
+.hero__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__input {
+  height: 20vh;
+  margin-bottom: 1rem;
+  background-color: #2f112d;
+}
+
+.hero__button {
+  align-self: end;
+  padding: 0.5rem 1rem;
+}
+
+.hero__img_profile {
+  width: 80%;
+}
+
+.hero__one_column {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.hero__ornacia {
+  margin: 0 auto;
+}
+
+.hero__title {
+  font-family: var(--font-family-title);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-title);
+  margin: 1rem 0 0;
+}

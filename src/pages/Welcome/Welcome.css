@@ -35,26 +35,12 @@
   text-align: center;
 }
 
-.welcome-input,
-.welcome-input::placeholder {
-  color: var(--input-text);
+.welcome__input {
   background-color: #150714;
-  outline: none;
-  border: none;
-  width: 100%;
-  padding: 0.75rem;
-  font-family: var(--font-family-body);
 }
 
 .welcome__btn {
-  width: 100%;
   margin-top: 2rem;
-  background-color: #00da76;
-  text-transform: uppercase;
-  color: var(--primary);
-  cursor: pointer;
+  width: 100%;
   padding: 0.5rem 0;
-  font-family: var(--font-family-texto);
-  font-size: var(--font-size-main-button);
-  font-weight: var(--font-weight-title);
 }

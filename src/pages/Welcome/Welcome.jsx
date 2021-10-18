@@ -17,12 +17,12 @@ function Welcome() {
           </h2>
           <input
             type="text"
-            className="welcome-input"
+            className="input-text welcome__input"
             placeholder="Type your username"
           />
           <p>Select your favorite color</p>
           <ColorPicker />
-          <button onClick={handleContinue} className="welcome__btn">
+          <button onClick={handleContinue} className="btn welcome__btn">
             continue
           </button>
         </div>

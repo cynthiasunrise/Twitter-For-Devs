@@ -60,6 +60,19 @@ body {
   /* margin-bottom: 1.5rem; */
 }
 
+.input-text {
+  width: 100%;
+  color: var(--input-text);
+  border: none;
+  font-size: var(--font-size-texto-normal);
+  font-family: var(--font-family-body);
+  padding: 0.75rem;
+}
+
+.input-text::placeholder {
+  color: var(--input-text);
+}
+
 .footer-text {
   color: var(--dark-text);
   font-size: var(--font-size-texto-footer);
@@ -70,10 +83,28 @@ body {
   color: var(--red);
 }
 
+.btn {
+  background-color: #00da76;
+  -webkit-text-stroke: 1px #000;
+  text-transform: uppercase;
+  color: var(--primary);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-main-button);
+  font-weight: var(--font-weight-title);
+}
+
 .container {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+}
+
+.ornacia {
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* @media screen and (min-width: 500px) {
