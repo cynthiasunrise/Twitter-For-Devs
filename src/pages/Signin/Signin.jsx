@@ -9,7 +9,7 @@ function Signin() {
       </div>
       <div className="signin__content-container">
         <div className="signin__content-body">
-          <h1 className="title-text">Devs united twitter</h1>
+          <h1 className="title-text signin__title">Devs united twitter</h1>
           <p>Un lugar para crear conexión entre DEVS</p>
           <img src="/images/google_signin.svg" alt="Google Sign In" />
         </div>
