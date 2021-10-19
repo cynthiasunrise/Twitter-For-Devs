@@ -21,7 +21,9 @@ function Welcome() {
             placeholder="Type your username"
           />
           <p>Select your favorite color</p>
-          <ColorPicker />
+          <div className="welcome__color-picker">
+            <ColorPicker />
+          </div>
           <button onClick={handleContinue} className="btn welcome__btn">
             continue
           </button>

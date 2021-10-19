@@ -44,3 +44,40 @@
   width: 100%;
   padding: 0.5rem 0;
 }
+
+@media screen and (min-width: 768px) {
+  .welcome {
+    flex-direction: row;
+    width: 90%;
+    max-width: 900px;
+    height: 100vh;
+    align-items: center;
+  }
+
+  .welcome__logo-container,
+  .welcome__content-container {
+    width: 50%;
+  }
+
+  .welcome__content-container {
+    height: 70vh;
+  }
+
+  .welcome__content-body {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .welcome__color-picker .color-picker {
+    width: 80%;
+  }
+
+  .welcome__footer {
+    width: 350px;
+    margin: 0 auto;
+    text-align: start;
+  }
+}

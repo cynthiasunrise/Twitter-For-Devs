@@ -13,7 +13,9 @@ function Signin() {
           <p>Un lugar para crear conexión entre DEVS</p>
           <img src="/images/google_signin.svg" alt="Google Sign In" />
         </div>
-        <Footer />
+        <div className="signin__footer">
+          <Footer />
+        </div>
       </div>
     </div>
   );
