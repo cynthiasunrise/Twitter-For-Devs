@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -7,18 +8,20 @@ function Header() {
   const getLeft = () => {
     if (pathname === '/') {
       return (
-        <img
-          className="ornacia header__img_profile"
-          src="/images/ornacia.jpg"
-          alt="My Profile Icon"
-        />
+        <Link to="/posts">
+          <img
+            className="ornacia header__img_profile"
+            src="/images/ornacia.jpg"
+            alt="My Profile Icon"
+          />
+        </Link>
       );
     }
     return (
-      <>
+      <Link className="header__back" to="/">
         <img className="header__img_back" src="/images/back.svg" alt="back" />
         <span className="title_text">cynthia</span>
-      </>
+      </Link>
     );
   };
 
@@ -47,11 +50,13 @@ function Header() {
     if (pathname === '/posts' || pathname === '/favorites') {
       return (
         <>
-          <img
-            className="header__img_logout"
-            src="/images/logout.svg"
-            alt="Logout"
-          />
+          <Link to="/signin">
+            <img
+              className="header__img_logout"
+              src="/images/logout.svg"
+              alt="Logout"
+            />
+          </Link>
         </>
       );
     }

@@ -1,7 +1,14 @@
+import { useHistory } from 'react-router';
 import Footer from '../../components/Footer';
 import './Signin.css';
 
 function Signin() {
+  const history = useHistory();
+
+  const handleSignin = () => {
+    history.push('/welcome');
+  };
+
   return (
     <div className="signin">
       <div className="signin__logo-container">
@@ -11,7 +18,7 @@ function Signin() {
         <div className="signin__content-body">
           <h1 className="title-text signin__title">Devs united twitter</h1>
           <p>Un lugar para crear conexión entre DEVS</p>
-          <img src="/images/google_signin.svg" alt="Google Sign In" />
+          <button className="signin__button" onClick={handleSignin}></button>
         </div>
         <div className="signin__footer">
           <Footer />

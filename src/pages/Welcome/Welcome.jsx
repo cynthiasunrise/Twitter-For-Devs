@@ -1,9 +1,14 @@
+import { useHistory } from 'react-router';
 import Footer from '../../components/Footer';
 import ColorPicker from './ColorPicker';
 import './Welcome.css';
 
 function Welcome() {
-  const handleContinue = () => {};
+  const history = useHistory();
+
+  const handleContinue = () => {
+    history.push('/');
+  };
 
   return (
     <div className="welcome">
