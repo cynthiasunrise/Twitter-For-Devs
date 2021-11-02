@@ -1,9 +1,20 @@
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { logout } from '../../firebase/firebase';
 import './Header.css';
 
 function Header() {
   const { pathname } = useLocation();
+  const history = useHistory();
+
+  const handleLogout = async () => {
+    try {
+      await logout(); //returns a PROMISE
+      history.push('/signin');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getLeft = () => {
     if (pathname === '/') {
@@ -55,6 +66,7 @@ function Header() {
               className="header__img_logout"
               src="/images/logout.svg"
               alt="Logout"
+              onClick={handleLogout}
             />
           </Link>
         </>

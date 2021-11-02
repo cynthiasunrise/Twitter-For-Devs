@@ -39,9 +39,10 @@
 }
 
 .signin__button {
-  background: url('../../images/google_signin.svg') no-repeat;
+  /* background: url('../../images/google_signin.svg') no-repeat; */
   height: 60px;
   cursor: pointer;
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {

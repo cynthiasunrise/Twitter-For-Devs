@@ -1,0 +1,25 @@
+.tweets__navigationOptions {
+  background-color: #150714;
+}
+
+.tweets__navigationOptions .container {
+  display: flex;
+}
+
+.tweets__navigationOption {
+  width: 50%;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary);
+  text-align: center;
+  padding: 0.5rem 0;
+  color: var(--dark-text);
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-main-button);
+  font-weight: var(--font-weight-title);
+}
+
+.tweets__navigationOption_active {
+  background: var(--dark-text);
+  color: #150714;
+}

@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/firestore';
 
 // Import the functions you need from the SDKs you need
@@ -19,7 +20,13 @@ const firebaseConfig = {
 // Inicializa Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Exporta la funcionalidad de la base de datos
+// Firestore
 export const firestore = firebase.firestore();
-// Exporta el paquete firebase para otros usos
+
+// Authentication
+export const auth = firebase.auth();
+export const provider = new firebase.auth.GoogleAuthProvider();
+export const loginConGoogle = () => auth.signInWithPopup(provider);
+export const logout = () => auth.signOut();
+
 export default firebase;
