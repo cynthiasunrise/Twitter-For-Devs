@@ -1,3 +1,8 @@
+.tweets .container {
+  padding: 2rem 1rem;
+  gap: 1rem;
+}
+
 .tweets__navigationOptions {
   background-color: #150714;
 }
@@ -22,4 +27,62 @@
 .tweets__navigationOption_active {
   background: var(--dark-text);
   color: #150714;
+}
+
+.tweet {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.6rem 0;
+  /* outline: 2px solid red; */
+  border-bottom: 2px solid #60265b;
+}
+
+.tweet__left {
+  width: 15%;
+  /* outline: 2px solid red; */
+}
+
+.tweet__right {
+  /* width: 85%; */
+  flex: 1;
+  /* outline: 2px solid red; */
+}
+
+.tweet__header {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  /* outline: 2px solid red; */
+  gap: 1rem;
+}
+
+.tweet__author {
+  font-family: var(--font-family-title);
+  font-size: 1rem;
+  font-weight: var(--font-weight-title);
+  color: #150714;
+}
+
+.tweet__date {
+  flex: 1;
+}
+
+.tweet__delete,
+.tweet__like {
+  cursor: pointer;
+}
+
+.tweet__like {
+  width: 20px;
+}
+
+.tweet__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tweet p {
+  margin: 1rem 0;
 }

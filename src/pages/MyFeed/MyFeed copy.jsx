@@ -17,23 +17,65 @@ function MyFeed() {
   const [tweet, setTweet] = useState(defaultTweet);
 
   useEffect(() => {
-    const tweetsUnsubscribeCallback = firestore
+    console.log('SE ESTÁ EJECUTANDO EL USEEFFECT, POR ENDE EL ONSNAPSHOT');
+    const cancelSuscription = firestore
       .collection('tweets')
-      .onSnapshot((tweetSnapshot) => {
-        const mappedtweets = tweetSnapshot.docs.map((tweetDoc) => {
-          return {
-            id: tweetDoc.id,
-            text: tweetDoc.data().text,
-            likes: tweetDoc.data().likes,
-            email: tweetDoc.data().email,
-            created: tweetDoc.data().created,
-            uid: tweetDoc.data().uid,
+      .onSnapshot((snapshot) => {
+        const mappedTweets = snapshot.docs.map(async (doc) => {
+          console.log('Itero tweet');
+          const promises = [];
+          const tweetMappped = {
+            text: doc.data().text,
+            likes: doc.data().likes,
+            email: doc.data().email,
+            created: doc.data().created,
+            uid: doc.data().uid,
+            id: doc.id,
           };
-        });
-        setTweets(mappedtweets);
-      });
 
-    return () => tweetsUnsubscribeCallback();
+          const userPreferencePromise = firestore
+            .collection('user_preferences')
+            .where('uid', '==', tweetMappped.uid)
+            .get();
+
+          const userPhotoPromise = firestore
+            .collection('user_photos')
+            .where('id', '==', tweetMappped.uid)
+            .get();
+
+          promises.push(userPreferencePromise);
+          promises.push(userPhotoPromise);
+
+          const resp = await Promise.all(promises).then((results) => {
+            const authorPreference = results[0].docs.map((doc) => {
+              return {
+                username: doc.data().username,
+                color: doc.data().color,
+              };
+            });
+
+            const authorPhoto = results[1].docs.map((doc) => {
+              return {
+                photoURL: doc.data().photoURL,
+              };
+            });
+
+            return {
+              ...tweetMappped,
+              author: authorPreference[0].username,
+              authorColor: authorPreference[0].color,
+              authorPhoto: authorPhoto[0].photoURL,
+            };
+          });
+          console.log(resp);
+          return resp;
+          // tempTweets.push([...tempTweets, resp]);
+        });
+        console.log('Seteo estado TWEETS');
+        console.log(mappedTweets);
+        setTweets(mappedTweets);
+        return () => cancelSuscription();
+      });
   }, []);
 
   const handleTweetPostChange = (e) => {

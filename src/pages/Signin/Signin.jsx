@@ -9,9 +9,15 @@ function Signin() {
   const history = useHistory();
   const { user } = useContext(UserContext);
 
+  console.log('Signin page', 'user', user);
+
   const handleSignin = async () => {
     try {
-      !user && (await loginConGoogle());
+      if (!user) {
+        console.log('Login with Google');
+        await loginConGoogle();
+      }
+
       history.push('/welcome');
     } catch (error) {
       console.log(error);

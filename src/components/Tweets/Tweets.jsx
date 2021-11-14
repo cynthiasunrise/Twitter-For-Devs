@@ -1,10 +1,10 @@
-import { useHistory, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import Tweet from './Tweet';
 import './Tweets.css';
 
-function Tweets() {
+function Tweets({ tweets }) {
   const { pathname } = useLocation();
-  const history = useHistory();
 
   const getNavigationOptions = () => {
     if (pathname === '/posts' || pathname === '/favorites') {
@@ -14,7 +14,7 @@ function Tweets() {
             <NavLink
               className="tweets__navigationOption"
               activeClassName="tweets__navigationOption_active"
-              to="/posts"
+              to="/"
             >
               Posts
             </NavLink>
@@ -35,7 +35,9 @@ function Tweets() {
     <section className="tweets">
       {getNavigationOptions()}
       <div className="container">
-        <div>TWEETS</div>;
+        {tweets.map((tweet) => (
+          <Tweet key={tweet.id} tweet={tweet} />
+        ))}
       </div>
     </section>
   );

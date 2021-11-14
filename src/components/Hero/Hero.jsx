@@ -1,45 +1,23 @@
-import { useLocation } from 'react-router';
+import useUserPreference from '../../hooks/useUserPreference';
 import './Hero.css';
 
 function Hero() {
-  const { pathname } = useLocation();
+  const { user, preference } = useUserPreference();
 
-  const handleSubmit = () => {};
-
-  if (pathname === '/') {
-    return (
-      <section className="hero">
-        <div className="container hero__two_columns">
-          <div className="hero__left">
-            <img
-              className="ornacia hero__img_profile"
-              src="/images/ornacia.jpg"
-              alt="Profile Pic"
-            />
-          </div>
-          <div className="hero__right">
-            <form className="hero__form" onSubmit={handleSubmit}>
-              <textarea
-                className="hero__input input-text"
-                placeholder="What's happening?"
-              ></textarea>
-              <button className="btn hero__button">POST</button>
-            </form>
-          </div>
-        </div>
-      </section>
-    );
-  }
   return (
     <section className="hero">
       <div className="container hero__one_column">
         <img
-          width="100px"
           className="ornacia hero__ornacia"
-          src="/images/ornacia.jpg"
+          src={user ? user.photoURL : '/images/ornacia.jpg'}
+          style={{ border: `5px solid ${preference.color}` }}
           alt="Profile canvas"
         />
-        <h2 className="hero__title">USERNAME</h2>
+        <h2 className="hero__title">
+          <span style={{ backgroundColor: `${preference.color}` }}>
+            {preference.username}
+          </span>
+        </h2>
       </div>
     </section>
   );

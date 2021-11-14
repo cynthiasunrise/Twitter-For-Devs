@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Footer from '../../components/Footer';
-import { UserContext } from '../../contexts/UserContext';
 import { firestore } from '../../firebase/firebase';
+import useUserPreference from '../../hooks/useUserPreference';
 import ColorPicker from './ColorPicker';
 import './Welcome.css';
 
@@ -12,14 +12,12 @@ const KEYS = {
 };
 
 function Welcome() {
-  const [preference, setPreference] = useState({
-    id: '',
-    username: '',
-    color: '',
-  });
+  const { user, preference, setPreference } = useUserPreference();
   const [save, setSave] = useState(false);
-  const { user } = useContext(UserContext);
   const history = useHistory();
+
+  console.log('Welcome page', 'user', user);
+  console.log('preference', preference);
 
   /*
   *   1. Entra usuario x 1era vez y graba en la BBDD y en el Local Storage
@@ -27,35 +25,28 @@ function Welcome() {
   */
 
   useEffect(() => {
-    firestore.collection('user_preferences').onSnapshot((snapshot) => {
-      const user_preference = snapshot.docs.map((doc) => {
-        return {
-          username: doc.data().username,
-          color: doc.data().color,
-          id: doc.id,
-        };
-      });
-      setPreference(user_preference[0]);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (save) {
+    if (save && preference.color && preference.username) {
+      console.log('**********USE EFFECT!!!! luego del SAVE*************');
       // Guardar en Local  Storage
       localStorage.setItem(KEYS.color, preference.color);
       localStorage.setItem(KEYS.username, preference.username);
 
       // Guardar en Firestore
-      firestore.doc(`user_preferences/${preference.id}`).update({
-        username: preference.username,
-        color: preference.color,
-        uid: user.uid,
-        email: user.email,
-      });
+      if (!!preference.uid)
+        firestore.doc(`user_preferences/${preference.id}`).update({
+          username: preference.username,
+          color: preference.color,
+        });
+      else
+        firestore.collection('user_preferences').add({
+          username: preference.username,
+          color: preference.color,
+          uid: user.uid,
+        });
 
       history.push('/');
     }
-  }, [save, preference.username, preference.color, preference.id]);
+  }, [save]);
 
   const handleColorChange = (color) => {
     setPreference((p) => ({ ...p, color }));

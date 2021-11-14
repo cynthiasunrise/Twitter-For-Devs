@@ -1,15 +1,18 @@
+import { useContext } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 import { logout } from '../../firebase/firebase';
 import './Header.css';
 
 function Header() {
   const { pathname } = useLocation();
   const history = useHistory();
+  const { user } = useContext(UserContext);
 
   const handleLogout = async () => {
     try {
-      await logout(); //returns a PROMISE
+      await logout();
       history.push('/signin');
     } catch (error) {
       console.log(error);
@@ -22,7 +25,7 @@ function Header() {
         <Link to="/posts">
           <img
             className="ornacia header__img_profile"
-            src="/images/ornacia.jpg"
+            src={user ? user.photoURL : '/images/ornacia.jpg'}
             alt="My Profile Icon"
           />
         </Link>

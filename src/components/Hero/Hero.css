@@ -6,6 +6,7 @@
   display: flex;
   align-items: top;
   padding: 2rem 1rem;
+  gap: 1rem;
 }
 
 .hero__left {
@@ -13,7 +14,7 @@
 }
 
 .hero__right {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .hero__form {
@@ -32,17 +33,15 @@
   padding: 0.5rem 1rem;
 }
 
-.hero__img_profile {
-  width: 80%;
-}
-
 .hero__one_column {
   padding: 2rem 1rem;
   text-align: center;
 }
 
-.hero__ornacia {
+.hero__ornacia,
+.tweet__ornacia {
   margin: 0 auto;
+  width: 60px;
 }
 
 .hero__title {
@@ -50,4 +49,5 @@
   font-size: 1.5rem;
   font-weight: var(--font-weight-title);
   margin: 1rem 0 0;
+  color: #150714;
 }
