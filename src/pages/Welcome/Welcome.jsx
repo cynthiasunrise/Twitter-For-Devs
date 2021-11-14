@@ -85,7 +85,7 @@ function Welcome() {
               onChange={handleColorChange}
             />
           </div>
-          <button onClick={handleSubmit} className="btn welcome__btn">
+          <button onClick={handleSubmit} className="btn btn-green welcome__btn">
             continue
           </button>
         </div>

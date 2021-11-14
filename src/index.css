@@ -84,7 +84,6 @@ body {
 }
 
 .btn {
-  background-color: #00da76;
   -webkit-text-stroke: 1px #000;
   text-transform: uppercase;
   color: var(--primary);
@@ -94,6 +93,14 @@ body {
   font-family: var(--font-family-title);
   font-size: var(--font-size-main-button);
   font-weight: var(--font-weight-title);
+}
+
+.btn-green {
+  background-color: #00da76;
+}
+
+.btn-red {
+  background-color: var(--red);
 }
 
 .container {

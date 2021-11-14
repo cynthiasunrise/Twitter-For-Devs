@@ -113,7 +113,7 @@ function MyFeed() {
                 value={tweet.text}
                 onChange={handleTweetPostChange}
               ></textarea>
-              <button type="submit" className="btn hero__button">
+              <button type="submit" className="btn btn-green hero__button">
                 POST
               </button>
             </form>
