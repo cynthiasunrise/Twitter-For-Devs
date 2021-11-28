@@ -2,12 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDYggnqz4fy9xryIoOJsk_9tw15gdQS200',
   authDomain: 'acamica-on-fire.firebaseapp.com',
@@ -24,6 +19,7 @@ firebase.initializeApp(firebaseConfig);
 export const firestore = firebase.firestore();
 export const firestore_serverTimestamp =
   firebase.firestore.FieldValue.serverTimestamp();
+export const firestore_documentId = firebase.firestore.FieldPath.documentId();
 
 // Authentication
 export const auth = firebase.auth();

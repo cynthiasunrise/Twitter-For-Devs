@@ -32,10 +32,6 @@
   box-sizing: border-box;
 }
 
-/* p {
-  margin: 0;
-} */
-
 img {
   max-width: 100%;
 }
@@ -57,7 +53,6 @@ body {
   font-size: var(--font-size-texto-title);
   font-weight: var(--font-weight-title);
   line-height: 1;
-  /* margin-bottom: 1.5rem; */
 }
 
 .input-text {
@@ -114,21 +109,10 @@ body {
   object-fit: cover;
 }
 
-/*@media screen and (min-width: 500px) {
-  :root {
-    --font-size-texto-normal: 1.3rem;
-  }
+.loading {
+  margin: 0 auto;
 }
 
-@media screen and (min-width: 768px) {
-  :root {
-    --font-size-texto-title: 1.2rem;
-    --font-size-texto-normal: 1.4rem;
-  }
+.error {
+  color: var(--red);
 }
-
-@media screen and (min-width: 1024px) {
-  :root {
-    --font-size-texto-normal: 1.6rem;
-  }
-}*/

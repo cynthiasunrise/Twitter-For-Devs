@@ -10,9 +10,9 @@
 }
 
 .dialog__content {
-  margin: 20% auto;
+  margin: 30vh auto;
   padding: 20px;
-  width: 30%;
+  width: 80vw;
   background-color: var(--primary);
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
   animation-name: modalopen;
@@ -20,11 +20,21 @@
   border-radius: 30px;
 }
 
+@media screen and (min-width: 600px) {
+  .dialog__content {
+    width: 450px;
+  }
+}
+
 .dialog__title {
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--dark-background);
+}
+
+.dialog__title h2 {
+  font-size: var(--font-size-main-button);
 }
 
 .dialog__buttons {

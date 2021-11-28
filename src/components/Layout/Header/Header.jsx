@@ -1,14 +1,31 @@
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
-import { logout } from '../../firebase/firebase';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { firestore, logout } from '../../../firebase/firebase';
+import useUserPreference from '../../../hooks/useUserPreference';
 import './Header.css';
 
 function Header() {
+  const { user, preference } = useUserPreference();
+  const [username, setUsername] = useState('');
   const { pathname } = useLocation();
   const history = useHistory();
-  const { user } = useContext(UserContext);
+  const { profileId } = useParams();
+
+  useEffect(() => {
+    if (pathname.includes('/profile')) {
+      const userPrefUnsubscribeCallback = firestore
+        .collection('user_preferences')
+        .where('uid', '==', profileId)
+        .limit(1)
+        .onSnapshot((userPrefSnapshot) => {
+          setUsername(userPrefSnapshot.docs[0].data().username);
+        });
+
+      return () => userPrefUnsubscribeCallback();
+    }
+  }, [pathname, profileId]);
 
   const handleLogout = async () => {
     try {
@@ -16,6 +33,14 @@ function Header() {
       history.push('/signin');
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getUserName = () => {
+    if (pathname === '/posts' || pathname === '/favorites') {
+      return preference.username;
+    } else if (pathname.includes('/profile')) {
+      return username;
     }
   };
 
@@ -34,7 +59,7 @@ function Header() {
     return (
       <Link className="header__back" to="/">
         <img className="header__img_back" src="/images/back.svg" alt="back" />
-        <span className="title_text">cynthia</span>
+        <span className="title_text">{getUserName()}</span>
       </Link>
     );
   };

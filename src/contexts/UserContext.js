@@ -5,8 +5,7 @@ export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {
   const [user, setUser] = useState();
-
-  // const saveUserPhotoURL = () => {};
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -17,14 +16,15 @@ export default function UserContextProvider({ children }) {
           photoURL: user.photoURL,
         });
       }
-      console.log('user Changed!', user);
+      setLoading(false);
+      // console.log('user Changed!', user);
     });
     return () => unsubscribe;
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
+    <UserContext.Provider value={{ user }}>
+      {!loading && children}
     </UserContext.Provider>
   );
 }

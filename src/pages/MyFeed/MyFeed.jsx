@@ -1,20 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
-import Header from '../../components/Header';
+import Header from '../../components/Layout/Header';
 import Tweets from '../../components/Tweets';
 import { UserContext } from '../../contexts/UserContext';
 import { firestore, firestore_serverTimestamp } from '../../firebase/firebase';
 
+const defaultTweet = {
+  text: '',
+  likes: 0,
+  favorite: false,
+  created: firestore_serverTimestamp,
+};
+
 function MyFeed() {
   const [tweets, setTweets] = useState([]);
   const { user } = useContext(UserContext);
-  const defaultTweet = {
-    text: '',
-    likes: 0,
-    email: '',
-    created: firestore_serverTimestamp,
-    uid: '',
-  };
   const [tweet, setTweet] = useState(defaultTweet);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const tweetsUnsubscribeCallback = firestore
@@ -25,6 +26,7 @@ function MyFeed() {
             id: tweetDoc.id,
             text: tweetDoc.data().text,
             likes: tweetDoc.data().likes,
+            favorite: tweetDoc.data().favorite,
             email: tweetDoc.data().email,
             created: tweetDoc.data().created,
             uid: tweetDoc.data().uid,
@@ -37,18 +39,34 @@ function MyFeed() {
   }, []);
 
   const handleTweetPostChange = (e) => {
-    setTweet({
-      ...tweet,
+    setTweet((c) => ({
+      ...c,
+      text: e.target.value,
       email: user.email,
       uid: user.uid,
-      text: e.target.value,
-    });
+    }));
+    e.target.value.length > 200
+      ? setError('Limit is 200 characthers')
+      : setError('');
+  };
+
+  const validate = () => {
+    if (tweet.text.length < 4) {
+      setError('You have to enter a post with minimum 4 characthers');
+      return false;
+    } else if (tweet.text.length > 200) {
+      setError('Limit is 200 characthers');
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    firestore.collection('tweets').add(tweet);
-    setTweet(defaultTweet);
+    if (validate()) {
+      firestore.collection('tweets').add(tweet);
+      setTweet(defaultTweet);
+    }
   };
 
   return (
@@ -61,6 +79,7 @@ function MyFeed() {
               className="ornacia hero__ornacia"
               src={user ? user.photoURL : '/images/ornacia.jpg'}
               alt="Profile Pic"
+              referrerPolicy="no-referrer"
             />
           </div>
           <div className="hero__right">
@@ -71,6 +90,7 @@ function MyFeed() {
                 value={tweet.text}
                 onChange={handleTweetPostChange}
               ></textarea>
+              {error && <span className="error">{error}</span>}
               <button type="submit" className="btn btn-green hero__button">
                 POST
               </button>
@@ -78,7 +98,7 @@ function MyFeed() {
           </div>
         </div>
       </section>
-      {tweets?.length > 0 && <Tweets tweets={tweets} />}
+      <Tweets tweets={tweets} />
     </>
   );
 }

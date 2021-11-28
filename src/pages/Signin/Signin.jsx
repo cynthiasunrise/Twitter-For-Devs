@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useHistory } from 'react-router';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Layout/Footer';
 import { UserContext } from '../../contexts/UserContext';
 import { loginConGoogle } from '../../firebase/firebase';
 import './Signin.css';
@@ -9,15 +9,11 @@ function Signin() {
   const history = useHistory();
   const { user } = useContext(UserContext);
 
-  console.log('Signin page', 'user', user);
-
   const handleSignin = async () => {
     try {
       if (!user) {
-        console.log('Login with Google');
         await loginConGoogle();
       }
-
       history.push('/welcome');
     } catch (error) {
       console.log(error);

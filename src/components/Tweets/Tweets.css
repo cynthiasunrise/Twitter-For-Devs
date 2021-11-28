@@ -34,26 +34,20 @@
   align-items: center;
   gap: 1rem;
   padding: 1.6rem 0;
-  /* outline: 2px solid red; */
   border-bottom: 2px solid #60265b;
 }
 
 .tweet__left {
   width: 15%;
-  /* outline: 2px solid red; */
 }
 
 .tweet__right {
-  /* width: 85%; */
   flex: 1;
-  /* outline: 2px solid red; */
 }
 
 .tweet__header {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
-  /* outline: 2px solid red; */
   gap: 1rem;
 }
 
@@ -62,6 +56,7 @@
   font-size: 1rem;
   font-weight: var(--font-weight-title);
   color: #150714;
+  text-decoration: none;
 }
 
 .tweet__date {

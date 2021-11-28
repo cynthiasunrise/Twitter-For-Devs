@@ -10,35 +10,33 @@ const defaultPreference = {
 const useUserPreference = () => {
   const { user } = useContext(UserContext);
   const [preference, setPreference] = useState(defaultPreference);
-
-  // console.log('USERPREFERENCE Hook');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // console.log('USERPREFERENCE Hook USEEFFECTTTT!!!!!!');
-
     if (user) {
-      // console.log('USERPREFERENCE Hook USEEFFECTTTT USER!!!!!');
       firestore
         .collection('user_preferences')
         .where('uid', '==', user.uid)
+        .limit(1)
         .get()
         .then((snapshot) => {
-          const user_preference = snapshot.docs.map((doc) => {
-            return {
-              username: doc.data().username,
-              color: doc.data().color,
-              uid: doc.data().uid,
-              id: doc.id,
+          if (snapshot.docs.length > 0) {
+            const user_preference = {
+              username: snapshot.docs[0].data().username,
+              color: snapshot.docs[0].data().color,
+              uid: snapshot.docs[0].data().uid,
+              id: snapshot.docs[0].id,
             };
-          });
-          user_preference.length
-            ? setPreference(user_preference[0])
-            : setPreference(defaultPreference);
+            setPreference(user_preference);
+          } else {
+            setPreference(defaultPreference);
+          }
+          setLoading(false);
         });
     }
   }, [user]);
 
-  return { user, preference, setPreference };
+  return { user, preference, setPreference, loadingPreference: loading };
 };
 
 export default useUserPreference;

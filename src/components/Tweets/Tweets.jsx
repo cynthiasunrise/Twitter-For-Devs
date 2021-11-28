@@ -14,7 +14,7 @@ function Tweets({ tweets }) {
             <NavLink
               className="tweets__navigationOption"
               activeClassName="tweets__navigationOption_active"
-              to="/"
+              to="/posts"
             >
               Posts
             </NavLink>
@@ -35,9 +35,9 @@ function Tweets({ tweets }) {
     <section className="tweets">
       {getNavigationOptions()}
       <div className="container">
-        {tweets.map((tweet) => (
-          <Tweet key={tweet.id} tweet={tweet} />
-        ))}
+        {tweets &&
+          tweets.length > 0 &&
+          tweets.map((tweet) => <Tweet key={tweet.id} tweet={tweet} />)}
       </div>
     </section>
   );

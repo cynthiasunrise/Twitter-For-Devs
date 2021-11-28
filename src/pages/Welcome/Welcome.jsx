@@ -1,37 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Layout/Footer';
+import { Loading } from '../../components/Loading';
 import { firestore } from '../../firebase/firebase';
 import useUserPreference from '../../hooks/useUserPreference';
 import ColorPicker from './ColorPicker';
 import './Welcome.css';
 
-const KEYS = {
-  color: 'color',
-  username: 'username',
-};
-
 function Welcome() {
-  const { user, preference, setPreference } = useUserPreference();
   const [save, setSave] = useState(false);
+  const { user, preference, setPreference, loadingPreference } =
+    useUserPreference();
+  const [error, setError] = useState({
+    estado: false,
+    mensaje: '',
+  });
+
   const history = useHistory();
 
-  console.log('Welcome page', 'user', user);
-  console.log('preference', preference);
-
-  /*
-  *   1. Entra usuario x 1era vez y graba en la BBDD y en el Local Storage
-      2. Si vuelve a entrar de nuevo, busca en el Local Storage primero, si no hay consulta en la BBDD. Si hay algún valor en cualquiera de los dos, jala de ahí y completa los campos. Si no hay ningún valor, muestra los campos vacíos
-  */
-
   useEffect(() => {
-    if (save && preference.color && preference.username) {
-      console.log('**********USE EFFECT!!!! luego del SAVE*************');
-      // Guardar en Local  Storage
-      localStorage.setItem(KEYS.color, preference.color);
-      localStorage.setItem(KEYS.username, preference.username);
-
-      // Guardar en Firestore
+    if (save) {
       if (!!preference.uid)
         firestore.doc(`user_preferences/${preference.id}`).update({
           username: preference.username,
@@ -46,14 +34,46 @@ function Welcome() {
 
       history.push('/');
     }
-  }, [save]);
+  }, [
+    save,
+    preference.color,
+    preference.username,
+    preference.id,
+    preference.uid,
+    user.uid,
+    history,
+  ]);
 
   const handleColorChange = (color) => {
     setPreference((p) => ({ ...p, color }));
   };
 
+  const validate = () => {
+    if (preference.username.length < 4) {
+      setError({
+        estado: true,
+        mensaje: 'You have to enter a username with minimum 4 characthers',
+      });
+      return false;
+    }
+    if (!preference.color) {
+      setError({
+        estado: true,
+        mensaje: 'You have to select a color',
+      });
+      return false;
+    }
+    setError({
+      estado: false,
+      mensaje: '',
+    });
+    return true;
+  };
+
   const handleSubmit = () => {
-    setSave(true);
+    if (validate()) {
+      setSave(true);
+    }
   };
 
   return (
@@ -63,31 +83,46 @@ function Welcome() {
       </div>
       <div className="welcome__content-container">
         <div className="welcome__content-body">
-          <h2 className="title-text">
-            Welcome <span className="red-text">name!</span>
-          </h2>
-          <input
-            type="text"
-            className="input-text welcome__input"
-            placeholder="Type your username"
-            value={preference.username}
-            onChange={(e) =>
-              setPreference((p) => ({
-                ...p,
-                username: e.target.value,
-              }))
-            }
-          />
-          <p>Select your favorite color</p>
-          <div className="welcome__color-picker">
-            <ColorPicker
-              value={preference.color}
-              onChange={handleColorChange}
-            />
-          </div>
-          <button onClick={handleSubmit} className="btn btn-green welcome__btn">
-            continue
-          </button>
+          {loadingPreference && (
+            <Loading className="loading" fill="pink" stroke="" />
+          )}
+          {!loadingPreference && (
+            <>
+              <h2 className="title-text">
+                Welcome <span className="red-text">name!</span>
+              </h2>
+              <input
+                type="text"
+                className="input-text welcome__input"
+                placeholder="Type your username"
+                value={preference.username}
+                onChange={(e) =>
+                  setPreference((p) => ({
+                    ...p,
+                    username: e.target.value,
+                  }))
+                }
+              />
+              <p>Select your favorite color</p>
+              <div className="welcome__color-picker">
+                <ColorPicker
+                  value={preference.color}
+                  onChange={handleColorChange}
+                />
+              </div>
+              {error.estado && (
+                <p style={{ marginBottom: 0 }} className="error">
+                  {error.mensaje}
+                </p>
+              )}
+              <button
+                onClick={handleSubmit}
+                className="btn btn-green welcome__btn"
+              >
+                continue
+              </button>
+            </>
+          )}
         </div>
         <Footer />
       </div>

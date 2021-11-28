@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import UserContextProvider from './contexts/UserContext';
 import MyFavorites from './pages/MyFavorites/MyFavorites';
 import MyFeed from './pages/MyFeed/MyFeed';
@@ -14,12 +15,16 @@ function App() {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" component={MyFeed} />
-            <Route path="/signin" component={Signin} />
-            <Route path="/welcome" component={Welcome} />
-            <Route path="/posts" component={MyPosts} />
-            <Route path="/favorites" component={MyFavorites} />
-            <Route path="/profile/:profileId" component={UserProfile} />
+            <PrivateRoute exact path="/" component={MyFeed} />
+            <Route exact path="/signin" component={Signin} />
+            <PrivateRoute exact path="/welcome" component={Welcome} />
+            <PrivateRoute exact path="/posts" component={MyPosts} />
+            <PrivateRoute exact path="/favorites" component={MyFavorites} />
+            <PrivateRoute
+              exact
+              path="/profile/:profileId"
+              component={UserProfile}
+            />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
