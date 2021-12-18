@@ -17,7 +17,6 @@ export default function UserContextProvider({ children }) {
         });
       }
       setLoading(false);
-      // console.log('user Changed!', user);
     });
     return () => unsubscribe;
   }, []);
